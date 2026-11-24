@@ -1,0 +1,23 @@
+# Frontend
+node_modules/
+dist/
+
+# Backend
+bin/
+obj/
+
+# Editors
+.vs/
+.idea/
+*.user
+*.suo
+
+# Local configuration
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+
+# OS
+.DS_Store
+Thumbs.db
