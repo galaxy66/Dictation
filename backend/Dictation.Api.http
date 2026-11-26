@@ -1,0 +1,110 @@
+@baseUrl = http://localhost:5000
+@token = replace-with-admin-access-token
+
+### Register a user
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "learner@example.com",
+  "password": "Learning2026"
+}
+
+### Log in
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "replace-with-bootstrap-admin-password"
+}
+
+### Read letters in sort order
+GET {{baseUrl}}/api/letters
+
+### Read one letter
+GET {{baseUrl}}/api/letters/1
+
+### Read all words or filter by letter
+GET {{baseUrl}}/api/words?letterId=1
+
+### Read one word
+GET {{baseUrl}}/api/words/1
+
+### Read sentences for a letter
+GET {{baseUrl}}/api/sentences?letterId=1
+
+### Read one sentence
+GET {{baseUrl}}/api/sentences/1
+
+### Add a letter (admin)
+POST {{baseUrl}}/api/admin/letters
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "character": "ث",
+  "sortOrder": 8
+}
+
+### Change a letter and its order (admin)
+PUT {{baseUrl}}/api/admin/letters/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "character": "آ ا",
+  "sortOrder": 0
+}
+
+### Delete a letter with no linked words or sentences (admin)
+DELETE {{baseUrl}}/api/admin/letters/9
+Authorization: Bearer {{token}}
+
+### Add a word (admin)
+POST {{baseUrl}}/api/admin/words
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "بابا",
+  "letterId": 2
+}
+
+### Change a word (admin)
+PUT {{baseUrl}}/api/admin/words/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "ببر",
+  "letterId": 2
+}
+
+### Delete a word (admin)
+DELETE {{baseUrl}}/api/admin/words/1
+Authorization: Bearer {{token}}
+
+### Add a sentence (admin)
+POST {{baseUrl}}/api/admin/sentences
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "بابا آب داد.",
+  "letterId": 2
+}
+
+### Change a sentence (admin)
+PUT {{baseUrl}}/api/admin/sentences/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "بابا به خانه آمد.",
+  "letterId": 2
+}
+
+### Delete a sentence (admin)
+DELETE {{baseUrl}}/api/admin/sentences/1
+Authorization: Bearer {{token}}

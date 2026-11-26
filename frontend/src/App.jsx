@@ -9,6 +9,15 @@ const cardColors = [
 export default function App() {
   const [showLetters, setShowLetters] = useState(false);
 
+  const speakLetter = (letter) => {
+    if (!('speechSynthesis' in window)) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(letter);
+    utterance.lang = 'fa-IR';
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <main
       lang="fa"
@@ -23,12 +32,15 @@ export default function App() {
       {showLetters ? (
         <section aria-label="حروف دیکته" className="relative grid w-full max-w-4xl grid-cols-2 gap-5 py-6 sm:grid-cols-4 sm:gap-6">
           {letters.map((letter, index) => (
-            <article
+            <button
               key={letter}
-              className={`flex min-h-36 items-center justify-center rounded-3xl border-4 border-white p-5 text-white shadow-lg sm:min-h-44 ${cardColors[index]}`}
+              type="button"
+              onClick={() => speakLetter(letter)}
+              aria-label={`شنیدن حرف ${letter}`}
+              className={`flex min-h-36 cursor-pointer items-center justify-center rounded-3xl border-4 border-white p-5 text-white shadow-lg transition-transform hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:scale-95 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-violet-700 sm:min-h-44 ${cardColors[index]}`}
             >
               <h2 className="text-5xl leading-normal font-bold sm:text-6xl">{letter}</h2>
-            </article>
+            </button>
           ))}
         </section>
       ) : (
